@@ -20,6 +20,9 @@ resource "hcp_vault_cluster" "cluster" {
   major_version_upgrade_config {
     upgrade_type = "MANUAL"
   }
+
+  proxy_endpoint = "ENABLED"
+
   lifecycle {
     prevent_destroy = true
   }
@@ -39,3 +42,4 @@ resource "hcp_hvn_route" "route" {
   destination_cidr = "172.31.0.0/16"
   target_link      = hcp_aws_network_peering.peering.self_link
 }
+
