@@ -1,3 +1,6 @@
+# To create this basic object prior to having dynamic auth in place in the workspace, use a short lived,
+# hardcoded VAULT_TOKEN variable on the workspace
+
 resource "vault_jwt_auth_backend" "jwt_hcp_tf" {
   description        = "JWT auth backend for HCP Terraform"
   path               = "jwt"
