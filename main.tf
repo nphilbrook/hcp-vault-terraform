@@ -17,6 +17,9 @@ resource "hcp_vault_cluster" "cluster" {
   #   datadog_api_key = "test_datadog"
   #   datadog_region  = "us1"
   # }
+  major_version_upgrade_config {
+    upgrade_type = "MANUAL"
+  }
   lifecycle {
     prevent_destroy = true
   }
