@@ -21,7 +21,7 @@ resource "hcp_vault_cluster" "cluster" {
     upgrade_type = "MANUAL"
   }
 
-  proxy_endpoint = "ENABLED"
+  proxy_endpoint = "DISABLED"
 
   lifecycle {
     prevent_destroy = true
