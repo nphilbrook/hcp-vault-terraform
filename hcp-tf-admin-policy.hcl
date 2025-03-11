@@ -23,6 +23,11 @@ path "sys/mounts/auth/jwt*" {
   capabilities = ["create", "read", "update", "list", "delete"]
 }
 
+# manage JWT config
+path "auth/jwt/config*" {
+  capabilities = ["create", "read", "update", "list", "delete"]
+}
+
 # manage JWT auth for TF roles
 path "auth/jwt/role/hcp-tf*" {
   capabilities = ["create", "read", "update", "list", "delete"]
