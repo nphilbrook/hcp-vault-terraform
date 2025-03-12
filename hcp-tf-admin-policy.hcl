@@ -22,12 +22,12 @@ path "auth/token/revoke-self" {
 
 # manage JWT auth mounts
 path "sys/auth/jwt*" {
-  capabilities = ["create", "read", "update", "list", "delete"]
+  capabilities = ["create", "read", "update", "list", "delete", "sudo"]
 }
 
 # because we can't have nice things
 path "sys/mounts/auth/jwt*" {
-  capabilities = ["create", "read", "update", "list", "delete"]
+  capabilities = ["create", "read", "update", "list", "delete", "sudo"]
 }
 
 # manage JWT config
@@ -44,11 +44,11 @@ path "auth/jwt/role/hcp-tf*" {
 # ======= USERPASS =============
 # manage userpass auth mounts
 path "sys/mounts/auth/userpass*" {
-  capabilities = ["create", "read", "update", "list", "delete"]
+  capabilities = ["create", "read", "update", "list", "delete", "sudo"]
 }
 
 path "sys/auth/userpass*" {
-  capabilities = ["create", "read", "update", "list", "delete"]
+  capabilities = ["create", "read", "update", "list", "delete", "sudo"]
 }
 
 # manage userpass users
