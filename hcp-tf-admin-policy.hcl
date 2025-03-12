@@ -18,7 +18,14 @@ path "auth/token/revoke-self" {
 #   capabilities = ["read"]
 # }
 
+# ======= JWT =============
+
 # manage JWT auth mounts
+path "sys/auth/jwt*" {
+  capabilities = ["create", "read", "update", "list", "delete"]
+}
+
+# because we can't have nice things
 path "sys/mounts/auth/jwt*" {
   capabilities = ["create", "read", "update", "list", "delete"]
 }
@@ -32,9 +39,15 @@ path "auth/jwt/config*" {
 path "auth/jwt/role/hcp-tf*" {
   capabilities = ["create", "read", "update", "list", "delete"]
 }
+# ======= END JWT =============
 
+# ======= USERPASS =============
 # manage userpass auth mounts
 path "sys/mounts/auth/userpass*" {
+  capabilities = ["create", "read", "update", "list", "delete"]
+}
+
+path "sys/auth/userpass*" {
   capabilities = ["create", "read", "update", "list", "delete"]
 }
 
@@ -42,6 +55,7 @@ path "sys/mounts/auth/userpass*" {
 path "auth/userpass/users*" {
   capabilities = ["create", "read", "update", "list", "delete"]
 }
+# ======= END USERPASS =============
 
 # manage policies for HCP TF
 path "sys/policies/acl/hcp-tf-*" {
