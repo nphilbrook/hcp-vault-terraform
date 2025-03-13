@@ -23,12 +23,12 @@ resource "hcp_vault_cluster" "cluster" {
 
   proxy_endpoint = "DISABLED"
 
-  public_endpoint = true
+  public_endpoint = false
 
-  ip_allowlist {
-    address     = "35.166.217.52/32"
-    description = "TFC agent"
-  }
+  # ip_allowlist {
+  #   address     = "35.166.217.52/32"
+  #   description = "TFC agent"
+  # }
 
   lifecycle {
     prevent_destroy = true
