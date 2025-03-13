@@ -52,7 +52,7 @@ resource "hcp_hvn_route" "route" {
 
 resource "hcp_hvn_route" "route_10s" {
   hvn_link         = hcp_hvn.hvn.self_link
-  hvn_route_id     = "vault-route"
+  hvn_route_id     = "vault-route-10s"
   destination_cidr = "10.0.0.0/8"
   target_link      = hcp_aws_network_peering.peering.self_link
 }
