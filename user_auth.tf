@@ -9,6 +9,7 @@ resource "vault_generic_endpoint" "admin_user" {
 {
   "policies": ["hcp-root"],
   "password": "${var.admin_userpass_password}"
+  "token_ttl": "24h"
 }
 EOT
 }
