@@ -46,7 +46,13 @@ resource "hcp_aws_network_peering" "peering" {
 resource "hcp_hvn_route" "route" {
   hvn_link         = hcp_hvn.hvn.self_link
   hvn_route_id     = "vault-route"
-  destination_cidr = "172.31.0.0/16"
+  destination_cidr = "172.16.0.0/12"
   target_link      = hcp_aws_network_peering.peering.self_link
 }
 
+resource "hcp_hvn_route" "route_10s" {
+  hvn_link         = hcp_hvn.hvn.self_link
+  hvn_route_id     = "vault-route"
+  destination_cidr = "10.0.0.0/8"
+  target_link      = hcp_aws_network_peering.peering.self_link
+}
