@@ -8,7 +8,7 @@ resource "vault_generic_endpoint" "admin_user" {
   data_json            = <<EOT
 {
   "policies": ["hcp-root"],
-  "password": "${var.admin_userpass_password}"
+  "password": "${var.admin_userpass_password}",
   "token_ttl": "24h"
 }
 EOT
