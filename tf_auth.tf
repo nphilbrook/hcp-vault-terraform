@@ -100,17 +100,10 @@ resource "vault_jwt_auth_backend_role" "hcp_tf_admin" {
 }
 
 
-resource "vault_jwt_auth_backend" "jwt_another" {
-  description        = "JWT auth backend for testing"
-  path               = "jwt_test"
-  oidc_discovery_url = "https://foo.terraform.io"
-  bound_issuer       = "https://foo.terraform.io"
-}
-
 resource "vault_jwt_auth_backend_role" "another" {
-  backend        = vault_jwt_auth_backend.jwt_another.path
-  role_name      = "hcp-tf-admin"
-  token_policies = ["default", vault_policy.hcp_tf_admin.name]
+  backend        = vault_jwt_auth_backend.jwt_hcp_tf.path
+  role_name      = "hcp-tf-admin-test"
+  token_policies = []
 
   bound_audiences = ["vault.workload.identity"]
   bound_claims = {
