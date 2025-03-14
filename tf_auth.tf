@@ -8,10 +8,81 @@ resource "vault_jwt_auth_backend" "jwt_hcp_tf" {
   bound_issuer       = "https://app.terraform.io"
 }
 
-resource "vault_policy" "hcp_tf_admin" {
-  name = "hcp-tf-admin"
+data "vault_policy_document" "hcp_tf_admin" {
 
-  policy = file("${path.module}/hcp-tf-admin-policy.hcl")
+  # AWS dynamic credentials - set this on a different role
+  # rule {
+  #   path         = "aws/*"
+  #   capabilities = ["read"]
+  # }
+
+  # ======= JWT =============
+
+  rule {
+    path         = "sys/auth/jwt*"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "manage JWT auth mounts"
+  }
+
+
+  rule {
+    path         = "sys/mounts/auth/jwt*"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "because we can't have nice things"
+  }
+
+
+  rule {
+    path         = "auth/jwt/config*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage JWT config"
+  }
+
+
+  rule {
+    path         = "auth/jwt/role/hcp-tf*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage JWT auth for TF roles"
+  }
+  # ======= END JWT =============
+
+  # ======= USERPASS =============
+  rule {
+    path         = "sys/mounts/auth/userpass*"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "manage userpass auth mounts"
+  }
+
+  rule {
+    path         = "sys/auth/userpass*"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+  }
+
+
+  rule {
+    path         = "auth/userpass/users*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage userpass users"
+  }
+  # ======= END USERPASS =============
+
+
+  rule {
+    path         = "sys/policies/acl/hcp-tf-*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage policies for HCP TF"
+  }
+
+  rule {
+    path         = "sys/namespaces*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage namespaces"
+  }
+}
+
+resource "vault_policy" "hcp_tf_admin" {
+  name   = "hcp-tf-admin"
+  policy = data.vault_policy_document.hcp_tf_admin.hcl
 }
 
 resource "vault_jwt_auth_backend_role" "hcp_tf_admin" {
