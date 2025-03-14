@@ -98,20 +98,3 @@ resource "vault_jwt_auth_backend_role" "hcp_tf_admin" {
   user_claim        = "terraform_full_workspace"
   role_type         = "jwt"
 }
-
-
-resource "vault_jwt_auth_backend_role" "another" {
-  backend        = vault_jwt_auth_backend.jwt_hcp_tf.path
-  role_name      = "hcp-tf-admin-test"
-  token_policies = []
-
-  bound_audiences = ["vault.workload.identity"]
-  bound_claims = {
-    sub = "organization:philbrook:project:SB Vault Lab:workspace:hcp-vault-tf:run_phase:*"
-  }
-  bound_claims_type = "glob"
-  user_claim        = "terraform_full_workspace"
-  role_type         = "jwt"
-}
-
-
