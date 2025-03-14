@@ -1,7 +1,7 @@
-resource "vault_namespace" "ns1" {
+resource "vault_namespace" "hcp_tf_aws" {
   path = "hcp-tf-aws"
 }
 
-resource "vault_namespace" "ns2" {
-  path = "application-dev"
+resource "vault_namespace" "integrations" {
+  path = "integrations"
 }
