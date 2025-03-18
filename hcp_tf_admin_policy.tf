@@ -28,7 +28,7 @@ data "vault_policy_document" "hcp_tf_admin" {
 
   # ======= AWS secrets engine setup =========
   rule {
-    path         = "sys/mount/aws"
+    path         = "sys/mounts/aws"
     capabilities = ["create", "read", "update", "list", "delete"]
     description  = "manage AWS secrets mount"
   }
