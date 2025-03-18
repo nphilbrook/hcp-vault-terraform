@@ -6,7 +6,7 @@ resource "vault_policy" "probable_pancake" {
 
 resource "vault_jwt_auth_backend_role" "probable_pancake" {
   backend        = vault_jwt_auth_backend.jwt_hcp_tf.path
-  role_name      = "probable-pancake"
+  role_name      = "hcp-tf-probable-pancake"
   token_policies = ["default", vault_policy.probable_pancake.name]
 
   bound_audiences = ["vault.workload.identity"]
