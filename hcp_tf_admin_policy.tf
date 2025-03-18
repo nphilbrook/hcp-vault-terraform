@@ -1,11 +1,4 @@
 data "vault_policy_document" "hcp_tf_admin" {
-
-  # AWS dynamic credentials - set this on a different role
-  # rule {
-  #   path         = "aws/*"
-  #   capabilities = ["read"]
-  # }
-
   # ======= JWT =============
   rule {
     path         = "sys/auth/jwt*"
