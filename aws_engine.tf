@@ -1,6 +1,12 @@
 resource "vault_aws_secret_backend" "aws" {
   access_key = var.initial_aws_access_key_id
   secret_key = var.initial_aws_secret_access_key
+  lifecycle {
+    ignore_changes = [
+      access_key,
+      secret_key
+    ]
+  }
 }
 
 resource "vault_aws_secret_backend_role" "probable_pancake_role" {
