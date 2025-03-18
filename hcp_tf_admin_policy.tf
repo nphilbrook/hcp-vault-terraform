@@ -72,6 +72,12 @@ data "vault_policy_document" "hcp_tf_admin" {
   }
 
   rule {
+    path         = "sys/policies/acl/aws-*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage policies for dynamic AWS credentials (prefix by convention)"
+  }
+
+  rule {
     path         = "sys/namespaces*"
     capabilities = ["create", "read", "update", "list", "delete"]
     description  = "manage namespaces"
