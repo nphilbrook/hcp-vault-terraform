@@ -26,6 +26,27 @@ data "vault_policy_document" "hcp_tf_admin" {
   }
   # ======= END JWT =============
 
+  # ======= CONFIGURE SAML AUTH =========
+  rule {
+    path         = "sys/auth/saml"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "manage SAML auth"
+  }
+
+  rule {
+    path         = "auth/saml/config"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage SAML auth configuration"
+  }
+
+  rule {
+    path         = "auth/saml/role*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage SAML authroles"
+  }
+  # ======= END SAML =========
+
+
   # ======= AWS secrets engine setup =========
   rule {
     path         = "sys/mounts/aws"
