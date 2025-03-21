@@ -12,7 +12,6 @@ data "vault_policy_document" "hcp_tf_admin" {
     description  = "because we can't have nice things"
   }
 
-
   rule {
     path         = "auth/jwt/config*"
     capabilities = ["create", "read", "update", "list", "delete"]
@@ -31,6 +30,12 @@ data "vault_policy_document" "hcp_tf_admin" {
     path         = "sys/auth/saml"
     capabilities = ["create", "read", "update", "list", "delete", "sudo"]
     description  = "manage SAML auth"
+  }
+
+  rule {
+    path         = "sys/mounts/auth/saml"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "because we can't have nice things"
   }
 
   rule {
