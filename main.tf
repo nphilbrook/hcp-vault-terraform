@@ -43,16 +43,18 @@ resource "hcp_aws_network_peering" "peering" {
   peer_vpc_region = "us-west-2"
 }
 
-resource "hcp_hvn_route" "route" {
-  hvn_link         = hcp_hvn.hvn.self_link
-  hvn_route_id     = "vault-route"
-  destination_cidr = "172.16.0.0/12"
-  target_link      = hcp_aws_network_peering.peering.self_link
+locals {
+  rfc1918_cidrs = {
+    "classA" = "10.0.0.0/8",
+    "classBs" = "172.16.0.0/12",
+    "classCs" = "192.168.0.0/16"
+  }
 }
 
-resource "hcp_hvn_route" "route_10s" {
+resource "hcp_hvn_route" "route" {
+  for_each         = local.rfc1918_cidrs
   hvn_link         = hcp_hvn.hvn.self_link
-  hvn_route_id     = "vault-route-10s"
-  destination_cidr = "10.0.0.0/8"
+  hvn_route_id     = "vault-route-${each.key}"
+  destination_cidr = each.value
   target_link      = hcp_aws_network_peering.peering.self_link
 }
