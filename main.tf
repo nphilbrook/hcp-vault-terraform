@@ -45,7 +45,7 @@ resource "hcp_aws_network_peering" "peering" {
 
 locals {
   rfc1918_cidrs = {
-    "classA" = "10.0.0.0/8",
+    "classA"  = "10.0.0.0/8",
     "classBs" = "172.16.0.0/12",
     "classCs" = "192.168.0.0/16"
   }

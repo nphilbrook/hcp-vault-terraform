@@ -1,7 +1,8 @@
-resource "vault_namespace" "hcp_tf_aws" {
-  path = "hcp-tf-aws"
+resource "vault_namespace" "hcp_tf_testing" {
+  path = "testing"
 }
 
-resource "vault_namespace" "integrations" {
-  path = "integrations"
+resource "vault_namespace" "live" {
+  path = "live"
 }
+

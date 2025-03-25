@@ -91,6 +91,7 @@ data "vault_policy_document" "hcp_tf_admin" {
   }
   # ======= END USERPASS =============
 
+  # ======= Manage Policies =============
   rule {
     path         = "sys/policies/acl/hcp-tf-*"
     capabilities = ["create", "read", "update", "list", "delete"]
@@ -102,7 +103,9 @@ data "vault_policy_document" "hcp_tf_admin" {
     capabilities = ["create", "read", "update", "list", "delete"]
     description  = "manage policies for dynamic AWS credentials (prefix by convention)"
   }
+  # ======= End Manage Policies =============
 
+  # ======= Manage Namespaces =============
   rule {
     path         = "sys/namespaces*"
     capabilities = ["create", "read", "update", "list", "delete"]
