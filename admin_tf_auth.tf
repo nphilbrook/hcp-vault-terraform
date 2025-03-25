@@ -1,4 +1,4 @@
-# To create this basic object prior to having dynamic auth in place in the workspace, use a short lived,
+# To create these basic object prior to having dynamic auth in place in the workspace, use a short lived,
 # hardcoded VAULT_TOKEN variable on the workspace
 
 resource "vault_jwt_auth_backend" "jwt_hcp_tf" {
@@ -8,9 +8,10 @@ resource "vault_jwt_auth_backend" "jwt_hcp_tf" {
   bound_issuer       = "https://app.terraform.io"
 }
 
+# This role is self-referencing and will be used by the code in *this workspace*
 resource "vault_policy" "hcp_tf_admin" {
   name = "hcp-tf-admin"
-  # ref hcp_tf_admin_policy.tf
+  # ref admin_tf_admin_policy.tf
   policy = data.vault_policy_document.hcp_tf_admin.hcl
 }
 
@@ -27,3 +28,4 @@ resource "vault_jwt_auth_backend_role" "hcp_tf_admin" {
   user_claim        = "terraform_full_workspace"
   role_type         = "jwt"
 }
+
