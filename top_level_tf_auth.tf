@@ -1,6 +1,6 @@
 # resource "vault_jwt_auth_backend" "jwt_hcp_tf_top_level" {
-#   for_each           = local.top_level_namespaces
-#   namespace          = each.value
+#   for_each           = vault_namespace.top_level_namespaces
+#   namespace          = each.vaule.path
 #   description        = "JWT auth backend for HCP Terraform"
 #   path               = "jwt"
 #   oidc_discovery_url = "https://app.terraform.io"
