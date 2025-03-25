@@ -8,11 +8,21 @@ output "private_endpoint_url" {
   value       = hcp_vault_cluster.cluster.vault_private_endpoint_url
 }
 
-output "namespace_ids" {
-  value = vault_namespace.top_level_namespaces[*].id
+output "namespace_path" {
+  value = {
+    for k, v in vault_namespace.top_level_namespaces : k => v.path
+  }
 }
 
-output "namespace_fq" {
-  value = vault_namespace.top_level_namespaces[*].path_fq
+output "namespace_ids" {
+  value = {
+    for k, v in vault_namespace.top_level_namespaces : k => v.id
+  }
+}
+
+output "namespace_path_fq" {
+  value = {
+    for k, v in vault_namespace.top_level_namespaces : k => v.path_fq
+  }
 }
 
