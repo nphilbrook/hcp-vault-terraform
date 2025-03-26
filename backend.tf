@@ -1,9 +1,10 @@
 terraform {
   cloud {
-    organization = "philbrook"
+    organization = "bankunited-core"
 
     workspaces {
-      name = "hcp-vault-tf"
+      project = "Vault Admin"
+      name    = "hcp-vault-terraform"
     }
   }
 }

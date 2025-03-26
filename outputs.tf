@@ -3,26 +3,26 @@ output "vault_version" {
   value       = hcp_vault_cluster.cluster.vault_version
 }
 
-output "private_endpoint_url" {
-  description = "The private endpoint of the Vault cluster"
-  value       = hcp_vault_cluster.cluster.vault_private_endpoint_url
-}
+# output "private_endpoint_url" {
+#   description = "The private endpoint of the Vault cluster"
+#   value       = hcp_vault_cluster.cluster.vault_private_endpoint_url
+# }
 
-output "namespace_path" {
-  value = {
-    for k, v in vault_namespace.top_level_namespaces : k => v.path
-  }
-}
+# output "namespace_path" {
+#   value = {
+#     for k, v in vault_namespace.top_level_namespaces : k => v.path
+#   }
+# }
 
-output "namespace_ids" {
-  value = {
-    for k, v in vault_namespace.top_level_namespaces : k => v.id
-  }
-}
+# output "namespace_ids" {
+#   value = {
+#     for k, v in vault_namespace.top_level_namespaces : k => v.id
+#   }
+# }
 
-output "namespace_path_fq" {
-  value = {
-    for k, v in vault_namespace.top_level_namespaces : k => v.path_fq
-  }
-}
+# output "namespace_path_fq" {
+#   value = {
+#     for k, v in vault_namespace.top_level_namespaces : k => v.path_fq
+#   }
+# }
 
