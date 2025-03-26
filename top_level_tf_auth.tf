@@ -30,6 +30,6 @@ resource "vault_jwt_auth_backend_role" "hcp_tf_top_level" {
     sub = "organization:philbrook:project:SB Vault Lab:workspace:vault-admin-terraform-${each.value.path}:run_phase:*"
   }
   bound_claims_type = "glob"
-  user_claim        = "terraform_full_project"
+  user_claim        = "terraform_project_id"
   role_type         = "jwt"
 }
