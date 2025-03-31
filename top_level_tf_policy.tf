@@ -1,6 +1,6 @@
 data "vault_policy_document" "hcp_tf_top_level" {
   # ======= JWT =============
-  # Do actually need these? Or just on the child namespaces...
+  # Do we actually need these? Or just on the child namespaces...
   # rule {
   #   path         = "sys/auth/jwt*"
   #   capabilities = ["create", "read", "update", "list", "delete", "sudo"]
@@ -10,7 +10,7 @@ data "vault_policy_document" "hcp_tf_top_level" {
   # rule {
   #   path         = "sys/mounts/auth/jwt*"
   #   capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-  #   description  = "because we can't have nice things"
+  #   description  = "Alternate path sometimes used by Vault provider"
   # }
 
   # rule {
@@ -41,7 +41,35 @@ data "vault_policy_document" "hcp_tf_top_level" {
     capabilities = ["create", "read", "update", "list", "delete"]
     description  = "manage namespaces"
   }
-  # ========= Manage JWT auth in BU namespaces ========
+  # ========= Manage JWT auth and policies in BU namespaces ========
+  rule {
+    path         = "+/sys/auth/jwt*"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "manage JWT auth mounts"
+  }
 
-  # ========= End Manage JWT auth in BU namespaces ========
+  rule {
+    path         = "+/sys/mounts/auth/jwt*"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "Alternate path sometimes used by Vault provider"
+  }
+
+  rule {
+    path         = "+/auth/jwt/config*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage JWT config"
+  }
+
+  rule {
+    path         = "+/auth/jwt/role/hcp-tf*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage JWT auth for TF roles"
+  }
+
+  rule {
+    path         = "+/sys/policies/acl/hcp-tf-*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage policies for HCP TF"
+  }
+  # ========= End Manage JWT auth and policies in BU namespaces ========
 }
