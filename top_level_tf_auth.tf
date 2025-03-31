@@ -8,7 +8,7 @@ resource "vault_jwt_auth_backend" "jwt_hcp_tf_top_level" {
 }
 
 # This role will be used by the vault-terraform-admin workspace to manage the `admin/live` namespace, tested in `admin/testing` namespace
-# Ref workspace variable setup: https://github.com/nphilbrook/hcp-tf-control/TBW
+# Ref workspace variable setup: https://github.com/nphilbrook/hcp-tf-control/blob/main/vault_admin_ws.tf
 resource "vault_policy" "hcp_tf_top_level" {
   for_each  = vault_namespace.top_level_namespaces
   namespace = each.value.path
