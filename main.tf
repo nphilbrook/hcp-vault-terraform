@@ -30,6 +30,8 @@ resource "hcp_vault_cluster" "cluster" {
   #   description = "TFC agent"
   # }
 
+  # Prevent accidental destruction - must be removed prior to any
+  # change that would cause destruction
   lifecycle {
     prevent_destroy = true
   }
