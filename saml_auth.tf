@@ -11,12 +11,3 @@ resource "vault_saml_auth_backend_role" "default" {
   name           = "default"
   token_policies = ["default"]
 }
-
-resource "vault_saml_auth_backend_role" "admin" {
-  path           = vault_saml_auth_backend.auth0.path
-  name           = "admin"
-  token_policies = ["hcp-root"]
-  bound_attributes = {
-    "vault-roles" = "vault-admin"
-  }
-}
