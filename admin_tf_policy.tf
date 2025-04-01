@@ -51,6 +51,14 @@ data "vault_policy_document" "hcp_tf_admin" {
   }
   # ======= END SAML =========
 
+  # ======= IDENTITY =================
+  rule {
+    path         = "identity/group*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage identity groups and aliases"
+  }
+  # ======= END IDENTITY =============
+
   # ======= USERPASS =============
   rule {
     path         = "sys/mounts/auth/userpass*"
