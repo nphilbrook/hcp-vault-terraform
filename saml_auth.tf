@@ -17,6 +17,7 @@ resource "vault_saml_auth_backend_role" "default" {
   groups_attribute = "http://schemas.auth0.com/vault-roles"
 }
 
+# break glass super admin
 resource "vault_saml_auth_backend_role" "hcp_root" {
   path             = vault_saml_auth_backend.auth0.path
   name             = "vault-super-admin"
@@ -28,7 +29,7 @@ resource "vault_saml_auth_backend_role" "hcp_root" {
 }
 
 # External group for admins
-resource "vault_identity_group" "superadmin" {
+resource "vault_identity_group" "regular_admin" {
   name     = "superadmin"
   type     = "external"
   policies = ["hcp-tf-admin"]
@@ -38,8 +39,8 @@ data "vault_generic_secret" "saml_mount" {
   path = "sys/auth/${local.saml_mount}"
 }
 
-resource "vault_identity_group_alias" "superadmin_alias" {
+resource "vault_identity_group_alias" "regular_admin_alias" {
   name           = "vault-admin"
   mount_accessor = data.vault_generic_secret.saml_mount.data.accessor
-  canonical_id   = vault_identity_group.superadmin.id
+  canonical_id   = vault_identity_group.regular_admin.id
 }
