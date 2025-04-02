@@ -20,6 +20,8 @@ resource "vault_saml_auth_backend_role" "default" {
   name             = "default"
   token_policies   = ["default"]
   groups_attribute = "http://schemas.auth0.com/vault-roles"
+  # 36 hours = 60*60*36 seconds
+  token_ttl = 129600
 }
 
 # break glass super admin
@@ -31,6 +33,10 @@ resource "vault_saml_auth_backend_role" "hcp_root" {
   bound_attributes = {
     "http://schemas.auth0.com/vault-super-admin" = "true"
   }
+  # 1 hours = 60*60 seconds
+  # token_ttl = 3600
+  # 36 hours = 60*60*36 seconds
+  token_ttl = 129600
 }
 
 # External group for admins
