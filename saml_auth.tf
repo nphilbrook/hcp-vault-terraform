@@ -17,11 +17,20 @@ resource "vault_saml_auth_backend_role" "default" {
   groups_attribute = "http://schemas.auth0.com/vault-roles"
 }
 
+resource "vault_saml_auth_backend_role" "hcp_root" {
+  path           = vault_saml_auth_backend.auth0.path
+  name           = "vault-super-admin"
+  token_policies = ["hcp-root"]
+  bound_attributes = {
+    "vault-super-admin" = "true"
+  }
+}
+
 # External group for admins
 resource "vault_identity_group" "superadmin" {
   name     = "superadmin"
   type     = "external"
-  policies = ["hcp-root"]
+  policies = ["hcp-tf-admin"]
 }
 
 data "vault_generic_secret" "saml_mount" {
