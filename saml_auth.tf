@@ -18,9 +18,10 @@ resource "vault_saml_auth_backend_role" "default" {
 }
 
 resource "vault_saml_auth_backend_role" "hcp_root" {
-  path           = vault_saml_auth_backend.auth0.path
-  name           = "vault-super-admin"
-  token_policies = ["hcp-root"]
+  path             = vault_saml_auth_backend.auth0.path
+  name             = "vault-super-admin"
+  token_policies   = ["hcp-root"]
+  groups_attribute = "http://schemas.auth0.com/vault-roles"
   bound_attributes = {
     "http://schemas.auth0.com/vault-super-admin" = "true"
   }
