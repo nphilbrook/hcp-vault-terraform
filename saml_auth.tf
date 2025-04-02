@@ -22,7 +22,7 @@ resource "vault_saml_auth_backend_role" "hcp_root" {
   name           = "vault-super-admin"
   token_policies = ["hcp-root"]
   bound_attributes = {
-    "vault-super-admin" = "true"
+    "http://schemas.auth0.com/vault-super-admin" = ["true"]
   }
 }
 
