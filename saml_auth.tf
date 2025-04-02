@@ -10,6 +10,11 @@ resource "vault_saml_auth_backend" "auth0" {
   default_role     = "default"
 }
 
+# It's insnane that we have to do this
+data "vault_generic_secret" "saml_mount" {
+  path = "sys/auth/${local.saml_mount}"
+}
+
 resource "vault_saml_auth_backend_role" "default" {
   path             = vault_saml_auth_backend.auth0.path
   name             = "default"
@@ -35,12 +40,20 @@ resource "vault_identity_group" "regular_admin" {
   policies = ["hcp-tf-admin"]
 }
 
-data "vault_generic_secret" "saml_mount" {
-  path = "sys/auth/${local.saml_mount}"
-}
-
 resource "vault_identity_group_alias" "regular_admin_alias" {
   name           = "vault-admin"
   mount_accessor = data.vault_generic_secret.saml_mount.data.accessor
   canonical_id   = vault_identity_group.regular_admin.id
+}
+
+resource "vault_identity_group" "cloud_operations_read" {
+  name     = "Cloud-Operations-Read"
+  type     = "external"
+  policies = ["Cloud-Operations-Read"]
+}
+
+resource "vault_identity_group_alias" "cloud_operatinrs_alias" {
+  name           = "Cloud-Operations-Read"
+  mount_accessor = data.vault_generic_secret.saml_mount.data.accessor
+  canonical_id   = vault_identity_group.cloud_operations_read.id
 }
