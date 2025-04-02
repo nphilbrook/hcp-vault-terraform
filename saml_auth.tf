@@ -14,7 +14,7 @@ resource "vault_saml_auth_backend_role" "default" {
   path             = vault_saml_auth_backend.auth0.path
   name             = "default"
   token_policies   = ["default"]
-  groups_attribute = "vault-roles"
+  groups_attribute = "http://schemas.auth0.com/vault-roles"
 }
 
 # External group for admins
