@@ -35,6 +35,40 @@ data "vault_policy_document" "hcp_tf_top_level" {
   # }
   # ======= End Manage Policies =============
 
+  # ======= CONFIGURE SAML AUTH =========
+  rule {
+    path         = "sys/auth/saml"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "manage SAML auth"
+  }
+
+  rule {
+    path         = "sys/mounts/auth/saml"
+    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
+    description  = "because we can't have nice things"
+  }
+
+  rule {
+    path         = "auth/saml/config"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage SAML auth configuration"
+  }
+
+  rule {
+    path         = "auth/saml/role*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage SAML authroles"
+  }
+  # ======= END SAML =========
+
+  # ======= IDENTITY (entities, groups, aliases) =================
+  rule {
+    path         = "identity/group*"
+    capabilities = ["create", "read", "update", "list", "delete"]
+    description  = "manage identity groups and aliases"
+  }
+  # ======= END IDENTITY ==============================
+
   # ======= Manage Namespaces =============
   rule {
     path         = "sys/namespaces*"
