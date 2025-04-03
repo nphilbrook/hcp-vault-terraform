@@ -5,12 +5,8 @@ locals {
   ])
 }
 
-resource "vault_namespace" "top_level_namespaces" {
+module "top_level_namespaces" {
   for_each = local.top_level_namespaces
-  path     = each.value
-  # Prevent accidental destruction - must be removed prior to any
-  # change that would cause destruction
-  lifecycle {
-    prevent_destroy = true
-  }
+  source   = "./modules/top-level-namespace"
+  name     = each.value
 }

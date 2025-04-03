@@ -10,19 +10,19 @@ output "private_endpoint_url" {
 
 output "namespace_path" {
   value = {
-    for k, v in vault_namespace.top_level_namespaces : k => v.path
+    for k, v in module.top_level_namespaces : k => v.path
   }
 }
 
 output "namespace_ids" {
   value = {
-    for k, v in vault_namespace.top_level_namespaces : k => v.id
+    for k, v in module.top_level_namespaces : k => v.id
   }
 }
 
 output "namespace_path_fq" {
   value = {
-    for k, v in vault_namespace.top_level_namespaces : k => v.path_fq
+    for k, v in module.top_level_namespaces : k => v.path_fq
   }
 }
 
