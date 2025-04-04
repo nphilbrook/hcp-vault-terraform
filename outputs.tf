@@ -26,3 +26,7 @@ output "namespace_path_fq" {
   }
 }
 
+output "provider_account_id" {
+  description = "The Account ID hosting the HVN"
+  value       = hcp_hvn.hvn.provider_account_id
+}
