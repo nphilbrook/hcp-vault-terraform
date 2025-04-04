@@ -60,3 +60,17 @@ resource "hcp_hvn_route" "route" {
   destination_cidr = each.value
   target_link      = hcp_aws_network_peering.peering.self_link
 }
+
+resource "hcp_aws_transit_gateway_attachment" "example" {
+  hvn_id                        = hcp_hvn.hvn.hvn_id
+  transit_gateway_attachment_id = "example-tgw-attachment"
+  transit_gateway_id            = "TBD" # aws_ec2_transit_gateway.example.id
+  resource_share_arn            = "TBD" # aws_ram_resource_share.example.arn
+}
+
+resource "hcp_hvn_route" "tgw_route" {
+  hvn_link         = hcp_hvn.hvn.self_link
+  hvn_route_id     = "hvn-to-tgw-attachment"
+  destination_cidr = "TBD" # aws_vpc.example.cidr_block
+  target_link      = hcp_aws_transit_gateway_attachment.example.self_link
+}
