@@ -30,3 +30,7 @@ output "provider_account_id" {
   description = "The Account ID hosting the HVN"
   value       = hcp_hvn.hvn.provider_account_id
 }
+
+output "hcp_aws_transit_gateway_attachment_id" {
+  value = hcp_aws_transit_gateway_attachment.tgw_attachment.provider_transit_gateway_attachment_id
+}
