@@ -17,7 +17,8 @@ resource "aws_vpc" "example" {
 }
 
 resource "aws_subnet" "example" {
-  vpc_id = aws_vpc.example.id
+  vpc_id     = aws_vpc.example.id
+  cidr_block = "172.31.1.0/24"
 }
 
 resource "aws_ec2_transit_gateway" "example" {
@@ -74,4 +75,7 @@ resource "aws_route" "example" {
   route_table_id         = aws_vpc.example.main_route_table_id
   destination_cidr_block = hcp_hvn.main.cidr_block
   transit_gateway_id     = aws_ec2_transit_gateway.example.id
+  # depends_on = [
+  #   aws_ec2_transit_gateway_vpc_attachment.example
+  # ]
 }
