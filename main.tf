@@ -65,6 +65,6 @@ resource "hcp_aws_transit_gateway_attachment" "tgw_attachment" {
 resource "hcp_hvn_route" "tgw_route" {
   hvn_link         = hcp_hvn.hvn.self_link
   hvn_route_id     = "hvn-to-tgw-w2"
-  destination_cidr = "10.6.0.0/24"
+  destination_cidr = "10.0.0.0/24"
   target_link      = hcp_aws_transit_gateway_attachment.tgw_attachment.self_link
 }
