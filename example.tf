@@ -11,6 +11,9 @@ resource "hcp_hvn" "main" {
 
 resource "aws_vpc" "example" {
   cidr_block = "172.31.0.0/16"
+  tags = {
+    Name = "example-vpc"
+  }
 }
 
 resource "aws_ec2_transit_gateway" "example" {

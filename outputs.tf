@@ -34,3 +34,10 @@ output "provider_account_id" {
 output "hcp_aws_transit_gateway_attachment_id" {
   value = hcp_aws_transit_gateway_attachment.tgw_attachment.provider_transit_gateway_attachment_id
 }
+
+
+data "aws_caller_identity" "this" {}
+
+output "aws_caller_identity" {
+  value = data.aws_caller_identity.this
+}
