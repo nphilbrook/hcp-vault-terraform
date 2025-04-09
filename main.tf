@@ -45,7 +45,7 @@ resource "hcp_aws_network_peering" "peering" {
   peer_vpc_region = "us-west-2"
 }
 
-resource "hcp_hvn_route" "route" {
+resource "hcp_hvn_route" "vpc_route" {
   hvn_link         = hcp_hvn.hvn.self_link
   hvn_route_id     = "vault-route-w2-vpc"
   destination_cidr = "172.31.0.0/16"
