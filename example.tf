@@ -60,5 +60,5 @@ resource "aws_ec2_transit_gateway_vpc_attachment_accepter" "example" {
 resource "aws_route" "example" {
   route_table_id         = aws_vpc.example.main_route_table_id
   destination_cidr_block = hcp_hvn.main.cidr_block
-  transit_gateway_id     = aws_ec2_transit_gateway_vpc_attachment_accepter.example.transit_gateway_id
+  transit_gateway_id     = aws_ec2_transit_gateway.example.id
 }
