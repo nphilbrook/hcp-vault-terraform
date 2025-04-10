@@ -1,40 +1,4 @@
 data "vault_policy_document" "hcp_tf_top_level" {
-  # ======= JWT =============
-  # Do we actually need these? Or just on the child namespaces...
-  # rule {
-  #   path         = "sys/auth/jwt*"
-  #   capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-  #   description  = "manage JWT auth mounts"
-  # }
-
-  # rule {
-  #   path         = "sys/mounts/auth/jwt*"
-  #   capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-  #   description  = "Alternate path sometimes used by Vault provider"
-  # }
-
-  # rule {
-  #   path         = "auth/jwt/config*"
-  #   capabilities = ["create", "read", "update", "list", "delete"]
-  #   description  = "manage JWT config"
-  # }
-
-  # rule {
-  #   path         = "auth/jwt/role/hcp-tf*"
-  #   capabilities = ["create", "read", "update", "list", "delete"]
-  #   description  = "manage JWT auth for TF roles"
-  # }
-  # ======= END JWT =============
-
-  # ======= Manage Policies =============
-  # same question...
-  # rule {
-  #   path         = "sys/policies/acl/hcp-tf-*"
-  #   capabilities = ["create", "read", "update", "list", "delete"]
-  #   description  = "manage policies for HCP TF"
-  # }
-  # ======= End Manage Policies =============
-
   # ======= CONFIGURE SAML AUTH =========
   rule {
     path         = "sys/auth/saml"
@@ -104,6 +68,12 @@ data "vault_policy_document" "hcp_tf_top_level" {
     path         = "+/sys/policies/acl/hcp-tf-*"
     capabilities = ["create", "read", "update", "patch", "list", "delete"]
     description  = "manage policies for HCP TF"
+  }
+
+  rule {
+    path         = "+/sys/policies/acl/break-glass"
+    capabilities = ["create", "read", "update", "patch", "list", "delete"]
+    description  = "manage the break glass policy"
   }
   # ========= End Manage JWT auth and policies in BU namespaces ========
 
