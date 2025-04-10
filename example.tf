@@ -1,6 +1,6 @@
-# provider "aws" {
-#   region = "us-west-2"
-# }
+provider "aws" {
+  region = "us-west-2"
+}
 
 # resource "hcp_hvn" "main" {
 #   hvn_id         = "main-hvn"
