@@ -1,5 +1,5 @@
 data "vault_policy_document" "hcp_tf_top_level" {
-  # ======= CONFIGURE SAML AUTH =========
+  # ======= CONFIGURE SAML AUTH AND POLICIES =========
   rule {
     path         = "sys/auth/saml"
     capabilities = ["create", "read", "update", "patch", "list", "delete", "sudo"]
@@ -23,7 +23,13 @@ data "vault_policy_document" "hcp_tf_top_level" {
     capabilities = ["create", "read", "update", "patch", "list", "delete"]
     description  = "manage SAML authroles"
   }
-  # ======= END SAML =========
+
+  rule {
+    path         = "sys/policies/acl/break-glass"
+    capabilities = ["create", "read", "update", "patch", "list", "delete"]
+    description  = "manage the break glass policy"
+  }
+  # ======= END SAML AND POLICIES =========
 
   # ======= IDENTITY (entities, groups, aliases) =================
   rule {
@@ -68,12 +74,6 @@ data "vault_policy_document" "hcp_tf_top_level" {
     path         = "+/sys/policies/acl/hcp-tf-*"
     capabilities = ["create", "read", "update", "patch", "list", "delete"]
     description  = "manage policies for HCP TF"
-  }
-
-  rule {
-    path         = "+/sys/policies/acl/break-glass"
-    capabilities = ["create", "read", "update", "patch", "list", "delete"]
-    description  = "manage the break glass policy"
   }
   # ========= End Manage JWT auth and policies in BU namespaces ========
 
