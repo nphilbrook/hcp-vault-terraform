@@ -1,6 +1,8 @@
-provider "aws" {
-  region = "us-west-2"
-}
+# for context, Ref https://github.com/hashicorp/terraform-provider-hcp/pull/1253
+
+# provider "aws" {
+#   region = "us-west-2"
+# }
 
 # resource "hcp_hvn" "main" {
 #   hvn_id         = "main-hvn"
