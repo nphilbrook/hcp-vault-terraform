@@ -25,9 +25,9 @@ data "vault_policy_document" "hcp_tf_top_level" {
   }
 
   rule {
-    path         = "sys/policies/acl/break-glass"
+    path         = "sys/policies/acl*"
     capabilities = ["create", "read", "update", "patch", "list", "delete"]
-    description  = "manage the break glass policy"
+    description  = "manage all polices"
   }
   # ======= END SAML AND POLICIES =========
 
@@ -64,17 +64,17 @@ data "vault_policy_document" "hcp_tf_top_level" {
     description  = "manage JWT config"
   }
 
-  rule {
-    path         = "+/auth/jwt/role/hcp-tf*"
-    capabilities = ["create", "read", "update", "patch", "list", "delete"]
-    description  = "manage JWT auth for TF roles"
-  }
+  # rule {
+  #   path         = "+/auth/jwt/role/hcp-tf*"
+  #   capabilities = ["create", "read", "update", "patch", "list", "delete"]
+  #   description  = "manage JWT auth for TF roles"
+  # }
 
-  rule {
-    path         = "+/sys/policies/acl/hcp-tf-*"
-    capabilities = ["create", "read", "update", "patch", "list", "delete"]
-    description  = "manage policies for HCP TF"
-  }
+  # rule {
+  #   path         = "+/sys/policies/acl/hcp-tf-*"
+  #   capabilities = ["create", "read", "update", "patch", "list", "delete"]
+  #   description  = "manage policies for HCP TF"
+  # }
   # ========= End Manage JWT auth and policies in BU namespaces ========
 
   # ======= mounts management ===========
