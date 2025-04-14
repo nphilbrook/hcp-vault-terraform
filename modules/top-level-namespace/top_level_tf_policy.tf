@@ -70,11 +70,6 @@ data "vault_policy_document" "hcp_tf_top_level" {
     description  = "manage JWT auth for TF roles"
   }
 
-  # rule {
-  #   path         = "+/sys/policies/acl/hcp-tf-*"
-  #   capabilities = ["create", "read", "update", "patch", "list", "delete"]
-  #   description  = "manage policies for HCP TF"
-  # }
   # ========= End Manage JWT auth and policies in BU namespaces ========
 
   # ======= mounts management ===========
