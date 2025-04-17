@@ -1,7 +1,7 @@
 resource "hcp_hvn" "hvn" {
   hvn_id         = "vault-hvn"
   cloud_provider = "aws"
-  region         = "us-west-2"
+  region         = local.region
   cidr_block     = "10.2.0.0/16"
 }
 
@@ -13,10 +13,11 @@ resource "hcp_vault_cluster" "cluster" {
   #   datadog_api_key = "test_datadog"
   #   datadog_region  = "us1"
   # }
-  # audit_log_config {
-  #   datadog_api_key = "test_datadog"
-  #   datadog_region  = "us1"
-  # }
+  audit_log_config {
+    cloudwatch_access_key_id     = aws_iam_access_key.audit_logs_key.id
+    cloudwatch_secret_access_key = aws_iam_access_key.audit_logs_key.secret
+    cloudwatch_region            = local.region
+  }
   major_version_upgrade_config {
     upgrade_type = "MANUAL"
   }
