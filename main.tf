@@ -55,16 +55,16 @@ resource "hcp_hvn_route" "vpc_route" {
 
 # Transit Gateway Attachments for us-west-2
 
-resource "hcp_aws_transit_gateway_attachment" "tgw_attachment" {
-  hvn_id                        = hcp_hvn.hvn.hvn_id
-  transit_gateway_attachment_id = "tgw-attachment-w2"
-  transit_gateway_id            = "tgw-0ed725f6387afbe0a"
-  resource_share_arn            = "arn:aws:ram:us-west-2:590184029125:resource-share/850c67fe-69af-44e1-868a-b1c1c2a339b1"
-}
+# resource "hcp_aws_transit_gateway_attachment" "tgw_attachment" {
+#   hvn_id                        = hcp_hvn.hvn.hvn_id
+#   transit_gateway_attachment_id = "tgw-attachment-w2"
+#   transit_gateway_id            = "tgw-0ed725f6387afbe0a"
+#   resource_share_arn            = "arn:aws:ram:us-west-2:590184029125:resource-share/850c67fe-69af-44e1-868a-b1c1c2a339b1"
+# }
 
-resource "hcp_hvn_route" "tgw_route" {
-  hvn_link         = hcp_hvn.hvn.self_link
-  hvn_route_id     = "hvn-to-tgw-w2"
-  destination_cidr = "10.0.0.0/8"
-  target_link      = hcp_aws_transit_gateway_attachment.tgw_attachment.self_link
-}
+# resource "hcp_hvn_route" "tgw_route" {
+#   hvn_link         = hcp_hvn.hvn.self_link
+#   hvn_route_id     = "hvn-to-tgw-w2"
+#   destination_cidr = "10.0.0.0/8"
+#   target_link      = hcp_aws_transit_gateway_attachment.tgw_attachment.self_link
+# }
