@@ -25,9 +25,9 @@ resource "vault_saml_auth_backend_role" "default" {
 }
 
 # break glass super admin
-resource "vault_saml_auth_backend_role" "hcp_root" {
+resource "vault_saml_auth_backend_role" "break_glass" {
   path             = vault_saml_auth_backend.auth0.path
-  name             = "vault-super-admin"
+  name             = "break-glass"
   token_policies   = ["hcp-root"]
   groups_attribute = "http://schemas.auth0.com/vault-roles"
   bound_attributes = {
@@ -50,16 +50,4 @@ resource "vault_identity_group_alias" "regular_admin_alias" {
   name           = "vault-admin"
   mount_accessor = data.vault_generic_secret.saml_mount.data.accessor
   canonical_id   = vault_identity_group.regular_admin.id
-}
-
-resource "vault_identity_group" "cloud_operations_read" {
-  name     = "Cloud-Operations-Read"
-  type     = "external"
-  policies = ["Cloud-Operations-Read"]
-}
-
-resource "vault_identity_group_alias" "cloud_operatinrs_alias" {
-  name           = "Cloud-Operations-Read"
-  mount_accessor = data.vault_generic_secret.saml_mount.data.accessor
-  canonical_id   = vault_identity_group.cloud_operations_read.id
 }
