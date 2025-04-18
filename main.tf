@@ -10,14 +10,15 @@ resource "hcp_vault_cluster" "cluster" {
   hvn_id     = hcp_hvn.hvn.hvn_id
   tier       = "standard_large"
   # metrics_config {
-  #   datadog_api_key = "test_datadog"
-  #   datadog_region  = "us1"
+  #   cloudwatch_access_key_id     = aws_iam_access_key.metrics_key.id
+  #   cloudwatch_secret_access_key = aws_iam_access_key.metrics_key.secret
+  #   cloudwatch_region            = local.region
   # }
-  audit_log_config {
-    cloudwatch_access_key_id     = aws_iam_access_key.audit_logs_key.id
-    cloudwatch_secret_access_key = aws_iam_access_key.audit_logs_key.secret
-    cloudwatch_region            = local.region
-  }
+  # audit_log_config {
+  #   cloudwatch_access_key_id     = aws_iam_access_key.audit_logs_key.id
+  #   cloudwatch_secret_access_key = aws_iam_access_key.audit_logs_key.secret
+  #   cloudwatch_region            = local.region
+  # }
   major_version_upgrade_config {
     upgrade_type = "MANUAL"
   }
