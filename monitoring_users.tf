@@ -1,3 +1,7 @@
+data "hcp_project" "this" {}
+data "hcp_organization" "this" {}
+data "aws_caller_identity" "this" {}
+
 data "aws_iam_policy" "demo_user_permissions_boundary" {
   name = "DemoUser"
 }
@@ -5,6 +9,10 @@ data "aws_iam_policy" "demo_user_permissions_boundary" {
 resource "aws_iam_user" "vault_audit_logs" {
   name                 = "vault-audit-logs"
   permissions_boundary = data.aws_iam_policy.demo_user_permissions_boundary.arn
+  tags = {
+    hcp-org-id     = data.hcp_organization.this.resource_id
+    hcp-project-id = data.hcp_project.this.resource_id
+  }
 }
 
 data "aws_iam_policy_document" "audit_logs_policy" {
@@ -19,7 +27,10 @@ data "aws_iam_policy_document" "audit_logs_policy" {
       "logs:CreateLogGroup",
       "logs:TagLogGroup"
     ]
-    resources = ["*"]
+    resources = [
+      "arn:aws:logs:*:${data.aws_caller_identity.this.account_id}:log-group:hashicorp/${data.hcp_organization.this.resource_id}/${data.hcp_project.this.resource_id}",
+      "arn:aws:logs:*:${data.aws_caller_identity.this.account_id}:log-group:hashicorp/${data.hcp_organization.this.resource_id}/${data.hcp_project.this.resource_id}:*"
+    ]
   }
 }
 

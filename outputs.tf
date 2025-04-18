@@ -36,8 +36,6 @@ output "provider_account_id" {
 # }
 
 
-# data "aws_caller_identity" "this" {}
-
 # output "aws_caller_identity" {
 #   value = data.aws_caller_identity.this
 # }
