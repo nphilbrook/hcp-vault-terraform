@@ -65,7 +65,7 @@ data "vault_policy_document" "hcp_tf_top_level" {
   }
 
   rule {
-    path         = "+/auth/jwt/role/hcp-tf*"
+    path         = "+/auth/jwt/role*"
     capabilities = ["create", "read", "update", "patch", "list", "delete"]
     description  = "manage JWT auth for TF roles"
   }
