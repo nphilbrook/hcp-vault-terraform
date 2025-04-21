@@ -70,6 +70,11 @@ data "vault_policy_document" "hcp_tf_top_level" {
     description  = "manage JWT auth for TF roles"
   }
 
+  rule {
+    path         = "+/sys/policies/acl*"
+    capabilities = ["create", "read", "update", "patch", "list", "delete"]
+    description  = "manage policies for BU namespaces"
+  }
   # ========= End Manage JWT auth and policies in BU namespaces ========
 
   # ======= mounts management ===========
@@ -92,12 +97,6 @@ data "vault_policy_document" "hcp_tf_top_level" {
     path         = "+/aws/roles*"
     capabilities = ["create", "read", "update", "patch", "list", "delete"]
     description  = "manage AWS roles"
-  }
-
-  rule {
-    path         = "+/sys/policies/acl/aws-*"
-    capabilities = ["create", "read", "update", "patch", "list", "delete"]
-    description  = "manage policies for dynamic AWS credentials (prefix by convention)"
   }
   # ======= End AWS secrets engine setup =========
 }
