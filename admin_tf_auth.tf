@@ -28,7 +28,7 @@ resource "vault_jwt_auth_backend_role" "hcp_tf_admin" {
 
   bound_audiences = ["vault.workload.identity"]
   bound_claims = {
-    sub = "organization:philbrook:project:SB Vault Lab:workspace:hcp-vault-terraform:run_phase:*"
+    sub = "organization:bankunited-core:project:*:workspace:hcp-vault-terraform:run_phase:*"
   }
   bound_claims_type = "glob"
   user_claim        = "terraform_full_workspace"
