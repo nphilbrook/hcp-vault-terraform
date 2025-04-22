@@ -1,7 +1,7 @@
 provider "hcp" {}
 
 provider "vault" {
-  address   = "https://vault-cluster-private-vault-e9bf486c.f4702644.z1.hashicorp.cloud:8200"
+  address   = hcp_vault_cluster.cluster.vault_private_endpoint_url
   namespace = "admin"
 }
 
@@ -12,10 +12,10 @@ locals {
   }
 }
 
-provider "aws" {
-  region = local.region
-  default_tags {
-    tags = local.tags_labels
-  }
-}
+# provider "aws" {
+#   region = local.region
+#   default_tags {
+#     tags = local.tags_labels
+#   }
+# }
 
