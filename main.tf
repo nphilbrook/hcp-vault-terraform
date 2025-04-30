@@ -23,7 +23,7 @@ resource "hcp_vault_cluster" "cluster" {
     upgrade_type = "MANUAL"
   }
 
-  proxy_endpoint = "DISABLED"
+  proxy_endpoint = "ENABLED"
 
   public_endpoint = false
 
