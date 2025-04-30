@@ -8,6 +8,11 @@ output "private_endpoint_url" {
   value       = hcp_vault_cluster.cluster.vault_private_endpoint_url
 }
 
+output "proxy_endpoint_url" {
+  description = "The private endpoint of the Vault cluster"
+  value       = hcp_vault_cluster.cluster.vault_proxy_endpoint_url
+}
+
 output "namespace_path" {
   value = {
     for k, v in module.top_level_namespaces : k => v.path
