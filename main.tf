@@ -14,6 +14,7 @@ resource "hcp_vault_cluster" "cluster" {
   #   cloudwatch_secret_access_key = aws_iam_access_key.metrics_key.secret
   #   cloudwatch_region            = local.region
   # }
+  # Security Lake compatibility? 
   audit_log_config {
     cloudwatch_access_key_id     = aws_iam_access_key.audit_logs_key.id
     cloudwatch_secret_access_key = aws_iam_access_key.audit_logs_key.secret
