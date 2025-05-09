@@ -82,6 +82,18 @@ data "vault_policy_document" "hcp_tf_top_level" {
 
   # ======= AWS secrets engine setup in BU namespace =========
   rule {
+    path         = "+/aws/config/root"
+    capabilities = ["create", "read", "update", "patch", "list", "delete"]
+    description  = "manage AWS secrets mount config"
+  }
+
+  rule {
+    path         = "+/aws/roles*"
+    capabilities = ["create", "read", "update", "patch", "list", "delete"]
+    description  = "manage AWS roles"
+  }
+
+  rule {
     path         = "+/aws-doormat/config/root"
     capabilities = ["create", "read", "update", "patch", "list", "delete"]
     description  = "manage AWS secrets mount config"
