@@ -7,7 +7,7 @@ data "aws_iam_policy" "demo_user_permissions_boundary" {
 }
 
 resource "aws_iam_user" "vault_monitoring" {
-  name                 = "vault-audit-logs"
+  name                 = "vault-monitoring"
   permissions_boundary = data.aws_iam_policy.demo_user_permissions_boundary.arn
   tags = {
     hcp-org-id     = data.hcp_organization.this.resource_id
