@@ -61,7 +61,7 @@ resource "aws_iam_user_policy" "audit_logs_user_policy" {
 }
 
 resource "aws_iam_user_policy" "metrics_user_policy" {
-  name   = "audit-logs-user-policy"
+  name   = "metrics-user-policy"
   user   = aws_iam_user.vault_monitoring.name
   policy = data.aws_iam_policy_document.metrics_policy.json
 }
