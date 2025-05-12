@@ -9,11 +9,11 @@ resource "hcp_vault_cluster" "cluster" {
   cluster_id = "vault-cluster"
   hvn_id     = hcp_hvn.hvn.hvn_id
   tier       = "standard_large"
-  # metrics_config {
-  #   cloudwatch_access_key_id     = var.metrics_key_id
-  #   cloudwatch_secret_access_key = var.metrics_secret_key
-  #   cloudwatch_region            = local.region
-  # }
+  metrics_config {
+    cloudwatch_access_key_id     = var.metrics_key_id
+    cloudwatch_secret_access_key = var.metrics_secret_key
+    cloudwatch_region            = local.region
+  }
   # Security Lake compatibility? 
   audit_log_config {
     cloudwatch_access_key_id     = aws_iam_access_key.audit_logs_key.id
