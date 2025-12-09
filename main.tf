@@ -9,17 +9,19 @@ resource "hcp_vault_cluster" "cluster" {
   cluster_id = "vault-cluster"
   hvn_id     = hcp_hvn.hvn.hvn_id
   tier       = "standard_large"
-  metrics_config {
-    cloudwatch_access_key_id     = aws_iam_access_key.monitoring.id
-    cloudwatch_secret_access_key = aws_iam_access_key.monitoring.secret
-    cloudwatch_region            = local.region
-  }
-  # Security Lake compatibility? 
-  audit_log_config {
-    cloudwatch_access_key_id     = aws_iam_access_key.monitoring.id
-    cloudwatch_secret_access_key = aws_iam_access_key.monitoring.secret
-    cloudwatch_region            = local.region
-  }
+
+  # Disable for CloudWatch cost savings
+  # metrics_config {
+  #   cloudwatch_access_key_id     = aws_iam_access_key.monitoring.id
+  #   cloudwatch_secret_access_key = aws_iam_access_key.monitoring.secret
+  #   cloudwatch_region            = local.region
+  # }
+
+  # audit_log_config {
+  #   cloudwatch_access_key_id     = aws_iam_access_key.monitoring.id
+  #   cloudwatch_secret_access_key = aws_iam_access_key.monitoring.secret
+  #   cloudwatch_region            = local.region
+  # }
   major_version_upgrade_config {
     upgrade_type = "MANUAL"
   }
