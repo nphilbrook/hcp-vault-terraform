@@ -14,23 +14,17 @@ resource "vault_policy" "hcp_tf_admin" {
   policy = data.vault_policy_document.hcp_tf_admin.hcl
 }
 
-resource "vault_policy" "hcp_tf_admin_top_level_management" {
-  name = "hcp-tf-admin-top-level-mgmt"
-  # ref admin_tf_admin_policy.tf
-  policy = data.vault_policy_document.hcp_tf_admin_top_level_management.hcl
-}
-
-# This role will be used by the code in *this workspace*
+# This role will be used by the code in *this* workspace*
 resource "vault_jwt_auth_backend_role" "hcp_tf_admin" {
   backend        = vault_jwt_auth_backend.jwt_hcp_tf.path
   role_name      = "hcp-tf-admin"
-  token_policies = ["default", vault_policy.hcp_tf_admin.name, vault_policy.hcp_tf_admin_top_level_management.name]
+  token_policies = ["default", vault_policy.hcp_tf_admin.name]
 
   bound_audiences = ["vault.workload.identity"]
   bound_claims = {
-    sub = "organization:philbrook:project:SB Vault Lab:workspace:hcp-vault-terraform:run_phase:*"
+    sub = "organization:philbrook:project:AWS Vault Lab:workspace:vault-aws-admin-terraform:run_phase:*"
   }
   bound_claims_type = "glob"
-  user_claim        = "terraform_full_workspace"
+  user_claim        = "terraform_workspace_id"
   role_type         = "jwt"
 }

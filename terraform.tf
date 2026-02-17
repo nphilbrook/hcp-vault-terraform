@@ -1,17 +1,13 @@
 terraform {
-  required_version = ">=1.8"
+  required_version = ">=1.14"
   required_providers {
-    hcp = {
-      source  = "hashicorp/hcp"
-      version = "~>0.104.0"
-    }
     vault = {
       source  = "hashicorp/vault"
-      version = "~>4.6.0"
+      version = "~>5.7"
     }
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~>5.94"
-    }
+    # aws = {
+    #   source  = "hashicorp/aws"
+    #   version = "~>6.0"
+    # }
   }
 }

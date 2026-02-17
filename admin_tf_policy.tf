@@ -25,31 +25,31 @@ data "vault_policy_document" "hcp_tf_admin" {
   }
   # ======= END JWT =============
 
-  # ======= CONFIGURE SAML AUTH =========
+  # ======= CONFIGURE OIDC AUTH =========
   rule {
-    path         = "sys/auth/saml"
+    path         = "sys/auth/oidc"
     capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-    description  = "manage SAML auth"
+    description  = "manage OIDC auth"
   }
 
   rule {
-    path         = "sys/mounts/auth/saml"
+    path         = "sys/mounts/auth/oidc"
     capabilities = ["create", "read", "update", "list", "delete", "sudo"]
     description  = "because we can't have nice things"
   }
 
   rule {
-    path         = "auth/saml/config"
+    path         = "auth/oidc/config"
     capabilities = ["create", "read", "update", "list", "delete"]
-    description  = "manage SAML auth configuration"
+    description  = "manage OIDC auth configuration"
   }
 
   rule {
-    path         = "auth/saml/role*"
+    path         = "auth/oidc/role*"
     capabilities = ["create", "read", "update", "list", "delete"]
-    description  = "manage SAML authroles"
+    description  = "manage OIDC authroles"
   }
-  # ======= END SAML =========
+  # ======= END OIDC =========
 
   # ======= IDENTITY =================
   rule {
@@ -58,25 +58,6 @@ data "vault_policy_document" "hcp_tf_admin" {
     description  = "manage identity groups and aliases"
   }
   # ======= END IDENTITY =============
-
-  # ======= USERPASS =============
-  rule {
-    path         = "sys/mounts/auth/userpass*"
-    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-    description  = "manage userpass auth mounts"
-  }
-
-  rule {
-    path         = "sys/auth/userpass*"
-    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-  }
-
-  rule {
-    path         = "auth/userpass/users*"
-    capabilities = ["create", "read", "update", "list", "delete"]
-    description  = "manage userpass users"
-  }
-  # ======= END USERPASS =============
 
   # ======= Manage Policies =============
   rule {
@@ -91,42 +72,4 @@ data "vault_policy_document" "hcp_tf_admin" {
     capabilities = ["create", "read", "update", "list", "delete"]
     description  = "manage namespaces"
   }
-}
-
-# Separate policy to manage Objects within the 2 top-level namespaces
-data "vault_policy_document" "hcp_tf_admin_top_level_management" {
-
-  # ======= JWT =============
-  rule {
-    path         = "+/sys/auth/jwt*"
-    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-    description  = "manage JWT auth mounts"
-  }
-
-  rule {
-    path         = "+/sys/mounts/auth/jwt*"
-    capabilities = ["create", "read", "update", "list", "delete", "sudo"]
-    description  = "Alternate path sometimes used by Vault provider"
-  }
-
-  rule {
-    path         = "+/auth/jwt/config*"
-    capabilities = ["create", "read", "update", "list", "delete"]
-    description  = "manage JWT config"
-  }
-
-  rule {
-    path         = "+/auth/jwt/role/hcp-tf*"
-    capabilities = ["create", "read", "update", "list", "delete"]
-    description  = "manage JWT auth for TF roles"
-  }
-  # ======= END JWT =============
-
-  # ======= Manage Policies =============
-  rule {
-    path         = "+/sys/policies/acl/hcp-tf-*"
-    capabilities = ["create", "read", "update", "list", "delete"]
-    description  = "manage policies for HCP TF"
-  }
-  # ======= End Manage Policies =============
 }
