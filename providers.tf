@@ -1,7 +1,8 @@
+provider "hcp" {}
+
 provider "vault" {
-  # Env variables should fill these in
-  # address   = 
-  # namespace = "admin"
+  address   = hcp_vault_cluster.cluster.vault_private_endpoint_url
+  namespace = "admin"
 }
 
 locals {
@@ -11,10 +12,10 @@ locals {
   }
 }
 
-# provider "aws" {
-#   region = local.region
-#   default_tags {
-#     tags = local.tags_labels
-#   }
-# }
+provider "aws" {
+  region = local.region
+  default_tags {
+    tags = local.tags_labels
+  }
+}
 

@@ -3,8 +3,8 @@ terraform {
     organization = "philbrook"
 
     workspaces {
-      project = "AWS Vault Lab"
-      name    = "vault-aws-admin-terraform"
+      project = "SB Vault Lab"
+      name    = "hcp-vault-terraform"
     }
   }
 }

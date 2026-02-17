@@ -1,0 +1,59 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "data.aws_iam_policy_document.audit_logs_policy" [label="data.aws_iam_policy_document.audit_logs_policy"];
+  "data.vault_generic_secret.saml_mount" [label="data.vault_generic_secret.saml_mount"];
+  "data.vault_policy_document.hcp_tf_admin" [label="data.vault_policy_document.hcp_tf_admin"];
+  "data.vault_policy_document.hcp_tf_admin_top_level_management" [label="data.vault_policy_document.hcp_tf_admin_top_level_management"];
+  "aws_iam_access_key.audit_logs_key" [label="aws_iam_access_key.audit_logs_key"];
+  "aws_iam_user.vault_audit_logs" [label="aws_iam_user.vault_audit_logs"];
+  "aws_iam_user_policy.audit_logs_user_policy" [label="aws_iam_user_policy.audit_logs_user_policy"];
+  "hcp_aws_network_peering.peering" [label="hcp_aws_network_peering.peering"];
+  "hcp_hvn.hvn" [label="hcp_hvn.hvn"];
+  "hcp_hvn_route.vpc_route" [label="hcp_hvn_route.vpc_route"];
+  "hcp_vault_cluster.cluster" [label="hcp_vault_cluster.cluster"];
+  "vault_identity_group.cloud_operations_read" [label="vault_identity_group.cloud_operations_read"];
+  "vault_identity_group.regular_admin" [label="vault_identity_group.regular_admin"];
+  "vault_identity_group_alias.cloud_operatinrs_alias" [label="vault_identity_group_alias.cloud_operatinrs_alias"];
+  "vault_identity_group_alias.regular_admin_alias" [label="vault_identity_group_alias.regular_admin_alias"];
+  "vault_jwt_auth_backend.jwt_hcp_tf" [label="vault_jwt_auth_backend.jwt_hcp_tf"];
+  "vault_jwt_auth_backend_role.hcp_tf_admin" [label="vault_jwt_auth_backend_role.hcp_tf_admin"];
+  "vault_policy.hcp_tf_admin" [label="vault_policy.hcp_tf_admin"];
+  "vault_policy.hcp_tf_admin_top_level_management" [label="vault_policy.hcp_tf_admin_top_level_management"];
+  "vault_saml_auth_backend.auth0" [label="vault_saml_auth_backend.auth0"];
+  "vault_saml_auth_backend_role.default" [label="vault_saml_auth_backend_role.default"];
+  "vault_saml_auth_backend_role.hcp_root" [label="vault_saml_auth_backend_role.hcp_root"];
+  subgraph "cluster_module.top_level_namespaces" {
+    label = "module.top_level_namespaces"
+    fontname = "sans-serif"
+    "module.top_level_namespaces.data.vault_policy_document.hcp_tf_top_level" [label="data.vault_policy_document.hcp_tf_top_level"];
+    "module.top_level_namespaces.vault_jwt_auth_backend.jwt_hcp_tf_top_level" [label="vault_jwt_auth_backend.jwt_hcp_tf_top_level"];
+    "module.top_level_namespaces.vault_jwt_auth_backend_role.hcp_tf_top_level" [label="vault_jwt_auth_backend_role.hcp_tf_top_level"];
+    "module.top_level_namespaces.vault_namespace.this" [label="vault_namespace.this"];
+    "module.top_level_namespaces.vault_policy.hcp_tf_top_level" [label="vault_policy.hcp_tf_top_level"];
+  }
+  "aws_iam_access_key.audit_logs_key" -> "aws_iam_user.vault_audit_logs";
+  "aws_iam_user_policy.audit_logs_user_policy" -> "data.aws_iam_policy_document.audit_logs_policy";
+  "aws_iam_user_policy.audit_logs_user_policy" -> "aws_iam_user.vault_audit_logs";
+  "hcp_aws_network_peering.peering" -> "hcp_hvn.hvn";
+  "hcp_hvn_route.vpc_route" -> "hcp_aws_network_peering.peering";
+  "hcp_vault_cluster.cluster" -> "aws_iam_access_key.audit_logs_key";
+  "hcp_vault_cluster.cluster" -> "hcp_hvn.hvn";
+  "vault_identity_group_alias.cloud_operatinrs_alias" -> "data.vault_generic_secret.saml_mount";
+  "vault_identity_group_alias.cloud_operatinrs_alias" -> "vault_identity_group.cloud_operations_read";
+  "vault_identity_group_alias.regular_admin_alias" -> "data.vault_generic_secret.saml_mount";
+  "vault_identity_group_alias.regular_admin_alias" -> "vault_identity_group.regular_admin";
+  "vault_jwt_auth_backend_role.hcp_tf_admin" -> "vault_jwt_auth_backend.jwt_hcp_tf";
+  "vault_jwt_auth_backend_role.hcp_tf_admin" -> "vault_policy.hcp_tf_admin";
+  "vault_jwt_auth_backend_role.hcp_tf_admin" -> "vault_policy.hcp_tf_admin_top_level_management";
+  "vault_policy.hcp_tf_admin" -> "data.vault_policy_document.hcp_tf_admin";
+  "vault_policy.hcp_tf_admin_top_level_management" -> "data.vault_policy_document.hcp_tf_admin_top_level_management";
+  "vault_saml_auth_backend.auth0" -> "hcp_vault_cluster.cluster";
+  "vault_saml_auth_backend_role.default" -> "vault_saml_auth_backend.auth0";
+  "vault_saml_auth_backend_role.hcp_root" -> "vault_saml_auth_backend.auth0";
+  "module.top_level_namespaces.vault_jwt_auth_backend.jwt_hcp_tf_top_level" -> "module.top_level_namespaces.vault_namespace.this";
+  "module.top_level_namespaces.vault_jwt_auth_backend_role.hcp_tf_top_level" -> "module.top_level_namespaces.vault_jwt_auth_backend.jwt_hcp_tf_top_level";
+  "module.top_level_namespaces.vault_jwt_auth_backend_role.hcp_tf_top_level" -> "module.top_level_namespaces.vault_policy.hcp_tf_top_level";
+  "module.top_level_namespaces.vault_policy.hcp_tf_top_level" -> "module.top_level_namespaces.data.vault_policy_document.hcp_tf_top_level";
+  "module.top_level_namespaces.vault_policy.hcp_tf_top_level" -> "module.top_level_namespaces.vault_namespace.this";
+}
