@@ -2,9 +2,9 @@ resource "vault_namespace" "this" {
   path = var.name
   # Prevent accidental destruction - must be removed prior to any
   # change that would cause destruction
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
 
 resource "vault_jwt_auth_backend" "jwt_hcp_tf_top_level" {

@@ -37,9 +37,9 @@ resource "hcp_vault_cluster" "cluster" {
 
   # Prevent accidental destruction - must be removed prior to any
   # change that would cause destruction
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
 
 resource "hcp_aws_network_peering" "peering" {
